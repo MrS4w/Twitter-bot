@@ -6,16 +6,22 @@ var config = require('./config');
 
 var T = new Twit(config);
 
-var tweet ={
-  status:'twitting from node.js!'
-}
+tweetIt();
+setInterval(tweetIt,1000*30);
 
-T.post('statuses/update',tweet,tweeted);
+function tweetIt() {
+  var r = Math.floor(Math.random()*9999);
+  var tweet ={
+    status:'Tweetando um número aleatório: '+r+'!'
+  }
 
-function tweeted(err, data, response) {
-  if(err){
-    console.log("Algo foi errado!");
-  }else {
-    console.log("Funcionou!");
+  T.post('statuses/update',tweet,tweeted);
+
+  function tweeted(err, data, response) {
+    if(err){
+      console.log("Algo foi errado!");
+    }else {
+      console.log("Funcionou!");
+    }
   }
 }
