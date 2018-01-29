@@ -6,7 +6,6 @@ var config = require('./config');
 
 var T = new Twit(config);
 
-
 //Seleciona um usuário stream
 var stream = T.stream('user');
 
