@@ -9,8 +9,10 @@ var T = new Twit(config);
 
 //Seleciona um usuário stream
 var stream = T.stream('user');
+
 //Quando alguém me segue
 stream.on('follow',followed);
+
 
 function followed(eventMsg) {
   console.log("Mensagem de seguir!");
@@ -18,6 +20,7 @@ function followed(eventMsg) {
   var screenName = eventMsg.source.screen_name;
   tweetMsg('Olá @'+screenName+' obrigado por me seguir!');
 }
+
 //Tweetando números aleatórios
 tweetIt();
 setInterval(tweetIt,1000*30);
@@ -48,9 +51,9 @@ function tweetMsg(txt) {
 
   function tweeted(err, data, response) {
     if(err){
-      console.log("Algo deu errado no follow msg!");
+      console.log("Algo deu errado na mensagem de follow!");
     }else {
-      console.log("Tweetou msg de follow!");
+      console.log("Tweetou depois de um follow!");
     }
   }
 }
