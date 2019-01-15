@@ -1,4 +1,4 @@
-console.log("Rodando!");
+console.log("Running!");
 
 var Twit = require('twit');
 
@@ -6,53 +6,53 @@ var config = require('./config');
 
 var T = new Twit(config);
 
-//Seleciona um usuário stream
+// Selects a user stream
 var stream = T.stream('user');
 
-//Quando alguém me segue
-stream.on('follow',followed);
+// When someone follows me
+stream.on('follow', followed);
 
 
 function followed(eventMsg) {
-  console.log("Mensagem de seguir!");
+  console.log("Following message!");
   var name = eventMsg.source.name;
   var screenName = eventMsg.source.screen_name;
-  tweetMsg('Olá @'+screenName+' obrigado por me seguir!');
+  tweetMsg('Hi @' + screenName + ' thanks for following me!');
 }
 
-//Tweetando números aleatórios
+// Tweet random numbers
 tweetIt();
-setInterval(tweetIt,1000*30);
+setInterval(tweetIt, 1000 * 30);
 
 function tweetIt() {
-  var r = Math.floor(Math.random()*9999);
-  var tweet ={
-    status: 'Tweetando um número aleatório: '+r+'!'
+  var r = Math.floor(Math.random() * 9999);
+  var tweet = {
+    status: 'Tweeting a random number: ' + r + '!'
   }
 
-  T.post('statuses/update',tweet,tweeted);
+  T.post('statuses/update', tweet, tweeted);
 
   function tweeted(err, data, response) {
-    if(err){
-      console.log("Algo deu errado no tweet de num!");
-    }else {
-      console.log("Tweetou um numero!");
+    if (err) {
+      console.log("Something wrong with the random number!");
+    } else {
+      console.log("Tweeted a number!");
     }
   }
 }
-//Tweetando mensagens de follow
+// Tweets thank you message
 function tweetMsg(txt) {
-  var tweet ={
+  var tweet = {
     status: txt
   }
 
-  T.post('statuses/update',tweet,tweeted);
+  T.post('statuses/update', tweet, tweeted);
 
   function tweeted(err, data, response) {
-    if(err){
-      console.log("Algo deu errado na mensagem de follow!");
-    }else {
-      console.log("Tweetou depois de um follow!");
+    if (err) {
+      console.log("Something wrong with the thank you message!");
+    } else {
+      console.log("Tweeted a thank you message!");
     }
   }
 }
